@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hồ sơ cá nhân – Portfolio</title>
+    <meta
+      name="description"
+      content="Trang hồ sơ cá nhân hiện đại, responsive, tối giản và đẹp mắt—bao gồm: Giới thiệu, Kỹ năng, Dự án, Kinh nghiệm, Chứng chỉ, Liên hệ."
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ========== Design System ==========
+       - Màu sắc, font, spacing, shadow đều định nghĩa bằng CSS variables
+       - Dễ đổi chủ đề (light / dark) bằng data-theme trên <html>
+    */
+      :root {
+        --bg: #0b0c10;
+        --panel: #111318;
+        --elev: #141821;
+        --text: #e8ecf1;
+        --muted: #a9b1bb;
+        --primary: #5aa9e6; /* xanh dương nhẹ */
+        --accent: #8ef6e4; /* xanh mint */
+        --warning: #ffcc66;
+        --success: #6bd390;
+        --danger: #ff6b6b;
+        --ring: rgba(90, 169, 230, 0.35);
+        --radius: 18px;
+        --radius-lg: 24px;
+        --shadow-1: 0 6px 22px rgba(0, 0, 0, 0.18);
+        --shadow-2: 0 22px 60px rgba(0, 0, 0, 0.35);
+        --border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      html[data-theme="light"] {
+        --bg: #f7f9fc;
+        --panel: #ffffff;
+        --elev: #f1f5f9;
+        --text: #0f172a;
+        --muted: #475569;
+        --primary: #2563eb;
+        --accent: #14b8a6;
+        --warning: #d97706;
+        --success: #16a34a;
+        --danger: #dc2626;
+        --ring: rgba(37, 99, 235, 0.25);
+        --border: 1px solid rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
+          Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text);
+        background: radial-gradient(
+            1200px 600px at 80% -10%,
+            rgba(138, 180, 248, 0.08),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 500px at -10% 10%,
+            rgba(20, 184, 166, 0.1),
+            transparent 55%
+          ),
+          var(--bg);
+        line-height: 1.65;
+        letter-spacing: 0.2px;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      .container {
+        width: min(1120px, 92%);
+        margin: 0 auto;
+      }
+
+      /* Header */
+      header.sticky {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: saturate(160%) blur(10px);
+        background: color-mix(in oklab, var(--bg) 86%, transparent);
+        border-bottom: var(--border);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+      }
+      .nav .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+      }
+      .brand .logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        box-shadow: var(--shadow-1);
+      }
+      .nav .links {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
+      .chip {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: color-mix(in oklab, var(--panel), var(--bg) 40%);
+        border: var(--border);
+        font-weight: 600;
+        font-size: 14px;
+        opacity: 0.92;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-weight: 600;
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--panel) 75%, var(--elev)),
+          var(--panel)
+        );
+        border: var(--border);
+        box-shadow: var(--shadow-1);
+        transition: transform 0.15s ease, box-shadow 0.2s ease;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-2);
+      }
+      .btn.primary {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          color-mix(in oklab, var(--primary), #000 18%)
+        );
+        color: #fff;
+        border: none;
+      }
+
+      /* Hero */
+      .hero {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 36px;
+        align-items: center;
+        padding: 44px 0 22px;
+      }
+      .card {
+        background: linear-gradient(
+          180deg,
+          color-mix(in oklab, var(--panel) 82%, var(--elev)),
+          var(--panel)
+        );
+        border: var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-1);
+      }
+      .p-24 {
+        padding: 24px;
+      }
+      .p-28 {
+        padding: 28px;
+      }
+      .avatar {
+        aspect-ratio: 1 / 1;
+        border-radius: 26px;
+        overflow: hidden;
+        position: relative;
+        isolation: isolate;
+        border: var(--border);
+      }
+      .avatar::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          400px 180px at 80% 0%,
+          rgba(255, 255, 255, 0.12),
+          transparent 45%
+        );
+        pointer-events: none;
+      }
+
+      .headline {
+        font-size: clamp(28px, 2.6vw + 12px, 48px);
+        line-height: 1.1;
+        margin: 0;
+      }
+      .subtitle {
+        font-size: clamp(14px, 1vw + 10px, 18px);
+        color: var(--muted);
+        margin: 12px 0 0;
+      }
+      .hero-cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      /* Badges */
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: var(--border);
+        background: color-mix(in oklab, var(--panel), var(--bg) 30%);
+        opacity: 0.9;
+      }
+
+      /* Sections */
+      section {
+        padding: 28px 0;
+      }
+      .section-title {
+        font-size: 22px;
+        margin: 0 0 14px;
+        letter-spacing: 0.3px;
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+      .grid.cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .grid.cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* Cards general */
+      .card .title {
+        font-weight: 700;
+        margin: 0 0 6px;
+      }
+      .card .muted {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* Skill bars */
+      .skill {
+        display: grid;
+        gap: 8px;
+      }
+      .bar {
+        height: 10px;
+        background: color-mix(in oklab, var(--panel), var(--bg) 25%);
+        border: var(--border);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .bar > span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        border-radius: 999px;
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        padding-left: 24px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 9px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: color-mix(in oklab, var(--primary), var(--bg) 70%);
+      }
+      .time-item {
+        position: relative;
+        margin-bottom: 16px;
+      }
+      .time-item::before {
+        content: "";
+        position: absolute;
+        left: -2px;
+        top: 6px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--primary);
+        box-shadow: 0 0 0 4px
+          color-mix(in oklab, var(--primary), transparent 75%);
+      }
+
+      /* Footer */
+      footer {
+        padding: 30px 0 44px;
+        color: var(--muted);
+      }
+
+      /* Responsive */
+      @media (max-width: 980px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 720px) {
+        .grid.cols-3 {
+          grid-template-columns: 1fr;
+        }
+        .grid.cols-2 {
+          grid-template-columns: 1fr;
+        }
+        .nav .links {
+          display: none;
+        }
+      }
+
+      /* Small animations */
+      .fade-in {
+        animation: fade 0.6s ease both;
+      }
+      .slide-up {
+        animation: up 0.6s ease 0.05s both;
+      }
+      .delay-1 {
+        animation-delay: 0.1s;
+      }
+      .delay-2 {
+        animation-delay: 0.2s;
+      }
+      .delay-3 {
+        animation-delay: 0.3s;
+      }
+      @keyframes fade {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes up {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Focus ring */
+      :focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+        border-radius: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header / Navbar -->
+    <header class="sticky">
+      <div class="container nav">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <span>yourname.dev</span>
+        </div>
+        <nav class="links">
+          <a class="chip" href="#about">Giới thiệu</a>
+          <a class="chip" href="#skills">Kỹ năng</a>
+          <a class="chip" href="#projects">Dự án</a>
+          <a class="chip" href="#experience">Kinh nghiệm</a>
+          <a class="chip" href="#contact">Liên hệ</a>
+          <button class="btn" id="themeBtn" aria-label="Chuyển chủ đề">
+            🌓
+          </button>
+          <a class="btn primary" href="#contact">Thuê tôi</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="container hero">
+      <div class="card p-28 fade-in">
+        <div class="avatar">
+          <!-- Thay ảnh avatar của bạn (tỉ lệ vuông) -->
+          <img
+            src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=800&auto=format&fit=crop"
+            alt="Ảnh chân dung"
+          />
+        </div>
+      </div>
+      <div class="fade-in delay-1">
+        <h1 class="headline">
+          Xin chào, mình là
+          <span style="color: var(--primary)">Phạm Trung Hiếu</span> 👋
+        </h1>
+        <p class="subtitle">
+          Frontend Developer • UI/UX Enthusiast • Từng làm việc với React, Vue,
+          Node.js
+        </p>
+        <div class="badges">
+          <span class="badge">1+ năm kinh nghiệm</span>
+          <span class="badge">Freelancer</span>
+          <span class="badge">Từ Hà Nội, Việt Nam</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn primary" href="#projects">Xem dự án</a>
+          <a class="btn" href="#contact">Liên hệ nhanh</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="container">
+      <h2 class="section-title">👨‍💻 Về tôi</h2>
+      <div class="card p-24 slide-up">
+        <p>
+          Mình là lập trình viên yêu thích xây dựng các sản phẩm web hiệu năng
+          cao, giao diện tinh gọn, và trải nghiệm người dùng mượt mà. Mình đặc
+          biệt hứng thú với hệ thống thiết kế, accessibility và tooling cho
+          front-end hiện đại. Ngoài viết code, mình thích chụp ảnh và chạy bộ
+          vào mỗi buổi sáng.
+        </p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="container">
+      <h2 class="section-title">🧰 Kỹ năng chính</h2>
+      <div class="grid cols-3">
+        <div class="card p-24 slide-up">
+          <h3 class="title">Frontend</h3>
+          <p class="muted">
+            HTML • CSS • JavaScript • TypeScript • React • Vue
+          </p>
+          <div class="skill">
+            <label>React</label>
+            <div class="bar"><span style="width: 90%"></span></div>
+          </div>
+          <div class="skill">
+            <label>TypeScript</label>
+            <div class="bar"><span style="width: 85%"></span></div>
+          </div>
+          <div class="skill">
+            <label>CSS/SCSS</label>
+            <div class="bar"><span style="width: 88%"></span></div>
+          </div>
+        </div>
+        <div class="card p-24 slide-up delay-1">
+          <h3 class="title">Backend</h3>
+          <p class="muted">Node.js • Express • REST • PostgreSQL • Prisma</p>
+          <div class="skill">
+            <label>Node.js</label>
+            <div class="bar"><span style="width: 80%"></span></div>
+          </div>
+          <div class="skill">
+            <label>PostgreSQL</label>
+            <div class="bar"><span style="width: 70%"></span></div>
+          </div>
+          <div class="skill">
+            <label>REST/GraphQL</label>
+            <div class="bar"><span style="width: 76%"></span></div>
+          </div>
+        </div>
+        <div class="card p-24 slide-up delay-2">
+          <h3 class="title">Khác</h3>
+          <p class="muted">
+            Git • CI/CD • Testing • Figma • PWAs • Performance
+          </p>
+          <div class="skill">
+            <label>Git & Teamwork</label>
+            <div class="bar"><span style="width: 92%"></span></div>
+          </div>
+          <div class="skill">
+            <label>Testing</label>
+            <div class="bar"><span style="width: 68%"></span></div>
+          </div>
+          <div class="skill">
+            <label>Perf & SEO</label>
+            <div class="bar"><span style="width: 75%"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="container">
+      <h2 class="section-title">🚀 Dự án tiêu biểu</h2>
+      <div class="grid cols-3">
+        <article class="card p-24 slide-up">
+          <img
+            src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200&auto=format&fit=crop"
+            alt="Dự án 1"
+            style="border-radius: 12px; margin-bottom: 12px"
+          />
+          <h3 class="title">Dashboard phân tích</h3>
+          <p class="muted">
+            Dashboard realtime cho e-commerce: biểu đồ bán hàng, heatmap khách
+            hàng, phân quyền.
+          </p>
+          <div class="hero-cta">
+            <a class="btn" href="#" target="_blank" rel="noreferrer"
+              >Xem demo</a
+            >
+            <a class="btn" href="#" target="_blank" rel="noreferrer"
+              >Source code</a
+            >
+          </div>
+        </article>
+        <article class="card p-24 slide-up delay-1">
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop"
+            alt="Dự án 2"
+            style="border-radius: 12px; margin-bottom: 12px"
+          />
+          <h3 class="title">Website giới thiệu</h3>
+          <p class="muted">
+            Landing page tốc độ cao, điểm Lighthouse 98+, SEO on-page tối ưu.
+          </p>
+          <div class="hero-cta">
+            <a class="btn" href="#" target="_blank" rel="noreferrer"
+              >Xem demo</a
+            >
+            <a class="btn" href="#" target="_blank" rel="noreferrer"
+              >Case study</a
+            >
+          </div>
+        </article>
+        <article class="card p-24 slide-up delay-2">
+          <img
+            src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop"
+            alt="Dự án 3"
+            style="border-radius: 12px; margin-bottom: 12px"
+          />
+          <h3 class="title">Ứng dụng ghi chú PWA</h3>
+          <p class="muted">
+            Ghi chú offline-first, đồng bộ đa thiết bị, hỗ trợ markdown và tìm
+            kiếm nhanh.
+          </p>
+          <div class="hero-cta">
+            <a class="btn" href="#" target="_blank" rel="noreferrer"
+              >Xem demo</a
+            >
+            <a class="btn" href="#" target="_blank" rel="noreferrer"
+              >Source code</a
+            >
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="container">
+      <h2 class="section-title">💼 Kinh nghiệm làm việc</h2>
+      <div class="card p-24 slide-up">
+        <div class="timeline">
+          <div class="time-item">
+            <h3 class="title">Senior Frontend Engineer — Công ty ABC</h3>
+            <p class="muted">2022 – Hiện tại • Hà Nội</p>
+            <p>
+              Phụ trách xây dựng hệ thống design system nội bộ, giảm 35% thời
+              gian phát triển tính năng mới.
+            </p>
+          </div>
+          <div class="time-item">
+            <h3 class="title">Frontend Engineer — Startup XYZ</h3>
+            <p class="muted">2019 – 2022 • TP.HCM</p>
+            <p>
+              Tối ưu hiệu năng SPA, time-to-interactive -40%, triển khai CI/CD
+              và e2e testing.
+            </p>
+          </div>
+          <div class="time-item">
+            <h3 class="title">Thực tập sinh — Studio WebCraft</h3>
+            <p class="muted">2018 • Remote</p>
+            <p>Hỗ trợ cắt HTML/CSS, làm quen với Git flow và review code.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certs" class="container">
+      <h2 class="section-title">🎓 Chứng chỉ</h2>
+      <div class="grid cols-2">
+        <div class="card p-24 slide-up">
+          <h3 class="title">Google UX Design Professional Certificate</h3>
+          <p class="muted">2023</p>
+        </div>
+        <div class="card p-24 slide-up delay-1">
+          <h3 class="title">AWS Certified Cloud Practitioner</h3>
+          <p class="muted">2022</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="container">
+      <h2 class="section-title">✉️ Liên hệ</h2>
+      <div class="grid cols-2">
+        <form class="card p-24 slide-up" onsubmit="handleSubmit(event)">
+          <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 12px">
+            <label
+              >Họ tên<input
+                required
+                name="name"
+                class="input"
+                type="text"
+                placeholder="Nguyễn Văn A"
+            /></label>
+            <label
+              >Email<input
+                required
+                name="email"
+                class="input"
+                type="email"
+                placeholder="ban@domain.com"
+            /></label>
+          </div>
+          <label
+            >Chủ đề<input
+              required
+              name="subject"
+              class="input"
+              type="text"
+              placeholder="Bạn cần gì?"
+          /></label>
+          <label
+            >Tin nhắn<textarea
+              required
+              name="message"
+              class="textarea"
+              rows="5"
+              placeholder="Mô tả ngắn gọn yêu cầu của bạn..."
+            ></textarea>
+          </label>
+          <div class="hero-cta">
+            <button class="btn primary" type="submit">Gửi yêu cầu</button>
+            <a class="btn" href="mailto:you@domain.com">Email trực tiếp</a>
+          </div>
+        </form>
+
+        <div class="card p-24 slide-up delay-1">
+          <h3 class="title">Thông tin</h3>
+          <p class="muted">
+            Luôn sẵn sàng cho các dự án freelance ngắn và dài hạn. Ưu tiên
+            remote.
+          </p>
+          <ul
+            style="
+              list-style: none;
+              padding: 0;
+              margin: 10px 0 0;
+              display: grid;
+              gap: 10px;
+            "
+          >
+            <li>📍 Hà Nội, Việt Nam</li>
+            <li>📧 you@domain.com</li>
+            <li>🔗 github.com/yourname</li>
+            <li>💼 linkedin.com/in/yourname</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div
+        class="container"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+        "
+      >
+        <span>© <span id="year"></span> Your Name. All rights reserved.</span>
+        <div style="display: flex; gap: 12px; align-items: center">
+          <a class="chip" href="#">Twitter</a>
+          <a class="chip" href="#">GitHub</a>
+          <a class="chip" href="#">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Minimal form styles -->
+    <style>
+      .input,
+      .textarea {
+        width: 100%;
+        margin-top: 6px;
+        border-radius: 12px;
+        background: color-mix(in oklab, var(--panel), var(--bg) 30%);
+        border: var(--border);
+        padding: 12px 14px;
+        color: var(--text);
+      }
+      .input::placeholder,
+      .textarea::placeholder {
+        color: color-mix(in oklab, var(--muted), #000 10%);
+      }
+    </style>
+
+    <script>
+      // Năm hiện tại
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Toggle theme
+      const btn = document.getElementById("themeBtn");
+      const prefersLight =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: light)").matches;
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else if (prefersLight)
+        document.documentElement.setAttribute("data-theme", "light");
+
+      btn.addEventListener("click", () => {
+        const cur = document.documentElement.getAttribute("data-theme");
+        const next = cur === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+
+      // Fake submit (demo)
+      function handleSubmit(e) {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target).entries());
+        alert(
+          `Cảm ơn ${data.name}! Mình sẽ phản hồi qua email: ${data.email}.`
+        );
+        e.target.reset();
+      }
+    </script>
+  </body>
+</html>
