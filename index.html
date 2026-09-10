@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="utf-8" />
@@ -61,10 +61,19 @@
       }
       body {
         margin: 0;
-        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
-          Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          "Apple Color Emoji",
+          "Segoe UI Emoji";
         color: var(--text);
-        background: radial-gradient(
+        background:
+          radial-gradient(
             1200px 600px at 80% -10%,
             rgba(138, 180, 248, 0.08),
             transparent 60%
@@ -149,7 +158,9 @@
         );
         border: var(--border);
         box-shadow: var(--shadow-1);
-        transition: transform 0.15s ease, box-shadow 0.2s ease;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.2s ease;
       }
       .btn:hover {
         transform: translateY(-1px);
@@ -396,7 +407,7 @@
       <div class="container nav">
         <div class="brand">
           <div class="logo" aria-hidden="true"></div>
-          <span>yourname.dev</span>
+          <span>HieuPiPo.dev</span>
         </div>
         <nav class="links">
           <a class="chip" href="#about">Giới thiệu</a>
@@ -417,10 +428,7 @@
       <div class="card p-28 fade-in">
         <div class="avatar">
           <!-- Thay ảnh avatar của bạn (tỉ lệ vuông) -->
-          <img
-            src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=800&auto=format&fit=crop"
-            alt="Ảnh chân dung"
-          />
+          <img src="./ytube.jpg" alt="Ảnh chân dung" />
         </div>
       </div>
       <div class="fade-in delay-1">
@@ -589,7 +597,7 @@
       <div class="card p-24 slide-up">
         <div class="timeline">
           <div class="time-item">
-            <h3 class="title">Senior Frontend Engineer — Công ty ABC</h3>
+            <h3 class="title">Senior Frontend Engineer — Công ty VTI</h3>
             <p class="muted">2022 – Hiện tại • Hà Nội</p>
             <p>
               Phụ trách xây dựng hệ thống design system nội bộ, giảm 35% thời
@@ -597,8 +605,8 @@
             </p>
           </div>
           <div class="time-item">
-            <h3 class="title">Frontend Engineer — Startup XYZ</h3>
-            <p class="muted">2019 – 2022 • TP.HCM</p>
+            <h3 class="title">Frontend Engineer — Startup VTI</h3>
+            <p class="muted">2019 – 2022 • Hà Nội</p>
             <p>
               Tối ưu hiệu năng SPA, time-to-interactive -40%, triển khai CI/CD
               và e2e testing.
@@ -689,10 +697,10 @@
               gap: 10px;
             "
           >
-            <li>📍 Hà Nội, Việt Nam</li>
-            <li>📧 you@domain.com</li>
-            <li>🔗 github.com/yourname</li>
-            <li>💼 linkedin.com/in/yourname</li>
+            <li>📍 Triều Khúc,Hà Nội, Việt Nam</li>
+            <li>📧 hieupipo512@gmail.com</li>
+            <li>🔗 github.com/hieupipo512</li>
+            <li>💼 linkedin.com/in/hieupipo512</li>
           </ul>
         </div>
       </div>
@@ -762,7 +770,7 @@
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
         alert(
-          `Cảm ơn ${data.name}! Mình sẽ phản hồi qua email: ${data.email}.`
+          `Cảm ơn ${data.name}! Mình sẽ phản hồi qua email: ${data.email}.`,
         );
         e.target.reset();
       }
